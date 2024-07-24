@@ -1,4 +1,4 @@
-/* import { userModel } from "../models/user.model.js";
+ import { userModel } from "../models/user.model.js";
 import { verifyToken } from "../utils/jwt.js"
 
 export async function authenticate(req, res, next) {
@@ -40,4 +40,4 @@ export async function authorize(req, res, next) {
   } else {
     return res.status(401).json({ error: "No autorizado" });
   }
-} */
+} 
