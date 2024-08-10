@@ -5,7 +5,7 @@ import { authenticate , authorize  } from "../middlewares/auth.middleware.js";
 
 const router = Router();
 
-router.get("/", async (req, res) => {
+router.get("/" , async (req, res) => {
   try {
     const users = await userModel.find();
     res.status(200).json(users);

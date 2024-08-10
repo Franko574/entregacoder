@@ -3,6 +3,7 @@ import mongoose from "mongoose";
 import cookieParser from "cookie-parser";
 import sessionRoutes from "./routes/sesion.routes.js";
 import userRoutes from "./routes/user.routes.js";
+import { authenticate } from "./middlewares/auth.middleware.js";
 
 const app = express();
 const PORT = 5000;
@@ -24,7 +25,7 @@ mongoose.connect("mongodb://localhost:27017/entregacoder")
 
 //Router configuration
 app.use("/api/sesion", sessionRoutes);
-app.use("/api/user", userRoutes);
+app.use("/api/users", authenticate, userRoutes);
 
 // Start server
 app.listen(PORT, () => {
