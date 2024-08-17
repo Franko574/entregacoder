@@ -1,4 +1,6 @@
 import jwt from "jsonwebtoken";
+import { config } from "../config/config.js";
+
 
 const PRIVATE_KEY = "s3cr3t";
 

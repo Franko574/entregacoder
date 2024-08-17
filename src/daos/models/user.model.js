@@ -7,7 +7,12 @@ const userSchema = new Schema ({
     age : { type : String , required : true } , 
     password : { type : String , required : true} ,
     role : { type : String , enum: ["admin", "user"], default :"user" } ,
-});
+    cart : { type : Schema.Types.ObjectId,ref:"cart" } ,
+    },
+    {
+    timestamps: true,
+    }
+);
 
 export const userModel = model ("user", userSchema);
 

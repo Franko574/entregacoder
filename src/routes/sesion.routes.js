@@ -1,5 +1,5 @@
 import { Router } from "express";
-import {userModel} from "../models/user.model.js";
+import {userModel} from "../daos/models/user.model.js";
 import { comparePassword } from "../utils/hash.js";
 import { generateToken, verifyToken } from "../utils/jwt.js";
 
