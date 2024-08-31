@@ -56,3 +56,5 @@ export default class ProductDaoMongoDB {
     }
   }
 }
+
+export const productDao = new ProductDaoMongoDB();

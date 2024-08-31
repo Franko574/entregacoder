@@ -118,3 +118,5 @@ export default class CartDaoMongoDB {
     }
   }
 }
+
+export const cartDao = new CartDaoMongoDB();

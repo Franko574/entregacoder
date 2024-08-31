@@ -55,3 +55,5 @@ export default class UserDaoMongoDB {
     }
   }
 }
+
+export const userDao = new UserDaoMongoDB();

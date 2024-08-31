@@ -1,4 +1,5 @@
-import ProductDaoMongoDB from "../daos/mongodb/product.dao.js";
+import { ProductDaoMongoDB } from "../daos/mongodb/product.dao.js";
+
 const prodDao = new ProductDaoMongoDB();
 
 export const getAll = async (page, limit, name, sort) => {

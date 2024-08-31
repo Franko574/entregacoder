@@ -8,10 +8,13 @@ import { authenticate } from "./middlewares/auth.middleware.js";
 import routes from "./routes/index.js";
 import { config } from "./config/config.js";
 import { initializePassport } from "./config/passport.config.js";
+import passport from "passport";
 
 const app = express();
-const PORT = 5000;
 
+const { PORT } = config;
+
+/* const PORT = 5000; */
 
 //Express configuration
 app.use(express.json());
