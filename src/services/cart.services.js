@@ -1,8 +1,11 @@
-import ProductDaoMongoDB from "../daos/mongodb/product.dao.js";
-const prodDao = new ProductDaoMongoDB();
+import ProductDaoMongoDB from "../daos/product.dao.js";
+import CartDaoMongoDB from "../daos/cart.dao.js";
+import { cartModel } from "../daos/models/cart.model.js";
+import { ticketDao } from "../daos/ticket.dao.js"; /* revisar el import ticket porque me trae la clase */
 
-import CartDaoMongoDB from "../daos/mongodb/cart.dao.js";
+const prodDao = new ProductDaoMongoDB();
 const cartDao = new CartDaoMongoDB();
+
 
 export const getAll = async () => {
   try {
@@ -95,5 +98,59 @@ export const clearCart = async (cartId) => {
     return await cartDao.clearCart(cartId)
   } catch (error) {
     console.log(error);
+  }
+};
+
+export const finalizarCompra = async (cartId, user) => {
+  try {
+    if (!user || !user._id) {
+      throw new Error('Usuario no válido o no autenticado');
+    }
+
+    const cart = await cartModel.findById(cartId).populate("products.product");
+
+    if (!cart) {
+      throw new Error('Carrito no encontrado');
+    }
+
+    const productosNoComprados = [];
+
+    for (let item of cart.products) {
+      const { product, quantity } = item;
+
+      if (!product || !product._id) {
+        throw new Error(`Producto no encontrado en el carrito`);
+      }
+
+      if (product.stock == null || isNaN(product.stock)) {
+        throw new Error(`El producto ${product.name || 'desconocido'} tiene un valor de stock inválido`);
+      }
+
+      if (product.stock < quantity) {
+        productosNoComprados.push(item);
+        continue;
+      }
+
+      const newStock = product.stock - quantity;
+      await prodDao.update(product._id, { stock: newStock });
+    }
+
+    const ticket = await ticketDao({
+      code: uuidv4(),
+      purchase_datetime: new Date(),
+      amount: cart.products.reduce(
+        (acc, curr) => acc + curr.quantity * curr.product.price,
+        0
+      ),
+      purchaser: user._id,
+    });
+
+    cart.products = productosNoComprados;
+    await cart.save();
+
+    return ticket;
+  } catch (error) {
+    console.log(error);
+    throw error;
   }
 };

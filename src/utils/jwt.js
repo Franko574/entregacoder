@@ -1,8 +1,9 @@
 import jwt from "jsonwebtoken";
 import { config } from "../config/config.js";
 
+const { JWT_SECRET } = config;
 
-const PRIVATE_KEY = "s3cr3t";
+/* const PRIVATE_KEY = "s3cr3t"; */
 
 export function generateToken(user){
     const payload ={
@@ -10,14 +11,14 @@ export function generateToken(user){
         role: user.role,
     };
     
-    return jwt.sign(payload,PRIVATE_KEY, {
+    return jwt.sign(payload, JWT_SECRET, {
         expiresIn: "5m",
     })
 }
 
 export function verifyToken(token) {
     try {
-        const decoded = jwt.verify(token,PRIVATE_KEY);
+        const decoded = jwt.verify(token, JWT_SECRET);
         
         return decoded;
     } catch (error) {

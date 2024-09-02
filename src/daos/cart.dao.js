@@ -1,9 +1,9 @@
-import { CartModel } from "./models/cart.model.js";
+import { cartModel } from "./models/cart.model.js";
 
 export default class CartDaoMongoDB {
   async create() {
     try {
-      return await CartModel.create({
+      return await cartModel.create({
         products: [],
       });
     } catch (error) {
@@ -13,7 +13,7 @@ export default class CartDaoMongoDB {
 
   async getAll() {
     try {
-      return await CartModel.find({});
+      return await cartModel.find({});
     } catch (error) {
       console.log(error);
     }
@@ -21,7 +21,7 @@ export default class CartDaoMongoDB {
 
   async getById(id) {
     try {
-      return await CartModel.findById(id).populate("products.product");
+      return await cartModel.findById(id).populate("products.product");
     } catch (error) {
       console.log(error);
     }
@@ -29,7 +29,7 @@ export default class CartDaoMongoDB {
 
   async delete(id) {
     try {
-      return await CartModel.findByIdAndDelete(id);
+      return await cartModel.findByIdAndDelete(id);
     } catch (error) {
       console.log(error);
     }
@@ -37,7 +37,7 @@ export default class CartDaoMongoDB {
 
   async existProdInCart(cartId, prodId) {
     try {
-      return await CartModel.findOne({
+      return await cartModel.findOne({
         _id: cartId,
         products: { $elemMatch: { product: prodId } },
       });

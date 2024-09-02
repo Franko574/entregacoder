@@ -12,9 +12,9 @@ import passport from "passport";
 
 const app = express();
 
-const { PORT } = config;
+/* const { PORT } = config; */
 
-/* const PORT = 5000; */
+const PORT = 5000; 
 
 //Express configuration
 app.use(express.json());

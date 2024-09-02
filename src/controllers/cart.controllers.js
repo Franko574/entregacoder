@@ -105,6 +105,61 @@ class CartController {
       next(error.message);
     }
   };
+
+  finalizarCompra = async (req, res, next) => {
+    try {
+      const { id } = req.params;
+
+      const cart = await cartModel.findById(id).populate("products.product");
+  
+      if (!cart) {
+        return res.status(404).json({
+          error: "No se encontró el carrito",
+        });
+      }
+
+       // Validar que la cantidad de productos dentro del carrito sea menor o igual al stock del producto
+      const productsWithoutStock = [];
+
+      // cart.products.filter((p) => {
+      //   if (product.stock <= p.quantity) {
+      //     productsWithoutStock.push(p);
+      //   }
+      //   return product.stock <= p.quantity;
+      // });
+
+      cart.products.forEach((p) => {
+        if (product.stock <= p.quantity) {
+          productsWithoutStock.push(p); /* probamos ---------------------- */
+          throw new Error(
+            `El producto ${product.name} no tiene stock suficiente`
+          );
+        }
+      });
+
+      const ticket = await ticketModel.create({
+        code: uuid(),
+        purchase_datetime: new Date(),
+        amount: cart.products.reduce(
+          (acc, curr) => acc + curr.quantity * curr.product.price,
+          0
+        ),
+        purchaser: req.user._id,
+      });
+
+      res.status(200).json({
+        message: "Compra finalizada",
+        ticket,
+      });
+    } catch (error) {
+      res.status(500).json({
+        error: "Error al finalizar la compra",
+        details: error.message,
+      });
+    }
+    
+    
+  };
 }
 
 export const cartcontroller = new CartController();
