@@ -9,6 +9,7 @@ import routes from "./routes/index.js";
 import { config } from "./config/config.js";
 import { initializePassport } from "./config/passport.config.js";
 import passport from "passport";
+import { errorHandler } from "./middlewares/errorHandler.js";
 
 const app = express();
 
@@ -41,6 +42,7 @@ mongoose
 app.use("/api", routes);
 app.use("/api/sesion", sessionRoutes);
 app.use("/api/users", authenticate, userRoutes);
+app.use(errorHandler);
 
 // Start server
 app.listen(PORT, () => {

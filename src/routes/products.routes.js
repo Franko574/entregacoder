@@ -6,7 +6,7 @@ import { authorizations } from "../middlewares/authorization.middleware.js";
 
 const router = Router();
 
-router.get("/", async (req, res) => {
+router.get("/", authorizations(["user"]), async (req, res) => {
   try {
     const products = await productModel.find();
     res.json(products);
@@ -18,7 +18,7 @@ router.get("/", async (req, res) => {
   }
 });
 
-router.get("/:id", async (req, res) => {
+router.get("/:id", authorizations(["user"]), async (req, res) => {
   try {
     const { id } = req.params;
     const product = await productModel.findById(id);

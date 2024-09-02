@@ -14,7 +14,12 @@ router.post(
   sessioncontroller.login
 );
 
-router.get("/current", passport.authenticate("jwt"), sessioncontroller.current);
+router.get(
+  "/current",
+  passport.authenticate("jwt"),
+  authorizations(["user"]),
+  sessioncontroller.current
+);
 
 router.get("/logout", (req, res) => {
   res.clearCookie("currentUser");
