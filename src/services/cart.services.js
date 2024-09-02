@@ -6,8 +6,8 @@ import { ticketDao } from "../daos/ticket.dao.js"; /* revisar el import ticket p
 const prodDao = new ProductDaoMongoDB();
 const cartDao = new CartDaoMongoDB();
 
-
-export const getAll = async () => {
+class CartService {
+ getAll = async () => {
   try {
     return await cartDao.getAll();
   } catch (error) {
@@ -15,7 +15,7 @@ export const getAll = async () => {
   }
 };
 
-export const getById = async (id) => {
+ getById = async (id) => {
   try {
     return await cartDao.getById(id);
   } catch (error) {
@@ -23,7 +23,7 @@ export const getById = async (id) => {
   }
 };
 
-export const create = async () => {
+ create = async () => {
   try {
     const newcart = await cartDao.create();
     if (!newcart) return false;
@@ -33,7 +33,7 @@ export const create = async () => {
   }
 };
 
-export const update = async (id, obj) => {
+ update = async (id, obj) => {
   try {
     return await cartDao.update(id, obj);
   } catch (error) {
@@ -41,7 +41,7 @@ export const update = async (id, obj) => {
   }
 };
 
-export const remove = async (id) => {
+ remove = async (id) => {
   try {
     const cartDel = await cartDao.delete(id);
     if (!cartDel) return false;
@@ -51,7 +51,7 @@ export const remove = async (id) => {
   }
 };
 
-export const addProdToCart = async (cartId, prodId) => {
+addProdToCart = async (cartId, prodId) => {
   try {
     const existCart = await getById(cartId);
     if (!existCart) return null;
@@ -65,7 +65,7 @@ export const addProdToCart = async (cartId, prodId) => {
   }
 };
 
-export const removeProdToCart = async (cartId, prodId) => {
+removeProdToCart = async (cartId, prodId) => {
   try {
     const existCart = await getById(cartId);
     // console.log(existCart)
@@ -79,7 +79,7 @@ export const removeProdToCart = async (cartId, prodId) => {
   }
 };
 
-export const updateProdQuantityToCart = async (cartId, prodId, quantity) => {
+updateProdQuantityToCart = async (cartId, prodId, quantity) => {
   try {
     const existCart = await getById(cartId);
     if (!existCart) return null;
@@ -91,7 +91,7 @@ export const updateProdQuantityToCart = async (cartId, prodId, quantity) => {
   }
 };
 
-export const clearCart = async (cartId) => {
+clearCart = async (cartId) => {
   try {
     const existCart = await getById(cartId);
     if (!existCart) return null;
@@ -101,7 +101,7 @@ export const clearCart = async (cartId) => {
   }
 };
 
-export const finalizarCompra = async (cartId, user) => {
+finalizarCompra = async (cartId, user) => {
   try {
     if (!user || !user._id) {
       throw new Error('Usuario no válido o no autenticado');
@@ -154,3 +154,6 @@ export const finalizarCompra = async (cartId, user) => {
     throw error;
   }
 };
+}
+
+export const cartservice = new CartService();
