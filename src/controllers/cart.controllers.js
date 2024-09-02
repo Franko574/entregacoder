@@ -1,9 +1,11 @@
 import * as service from "../services/cart.services.js";
-import {cartservice} from "../services/cart.services.js";
+import { cartservice } from "../services/cart.services.js";
 
-class CartController  {
-  constructor (){ this.service = cartservice } 
-  
+class CartController {
+  constructor() {
+    this.service = cartservice;
+  }
+
   getAll = async (req, res, next) => {
     try {
       const response = await service.getAll();
@@ -114,14 +116,14 @@ class CartController  {
       const { id } = req.params;
 
       const cart = await cartModel.findById(id).populate("products.product");
-  
+
       if (!cart) {
         return res.status(404).json({
           error: "No se encontró el carrito",
         });
       }
 
-       // Validar que la cantidad de productos dentro del carrito sea menor o igual al stock del producto
+      // Validar que la cantidad de productos dentro del carrito sea menor o igual al stock del producto
       const productsWithoutStock = [];
 
       // cart.products.filter((p) => {
@@ -160,8 +162,6 @@ class CartController  {
         details: error.message,
       });
     }
-    
-    
   };
 }
 

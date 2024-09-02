@@ -14,7 +14,7 @@ const app = express();
 
 /* const { PORT } = config; */
 
-const PORT = 5000; 
+const PORT = 5000;
 
 //Express configuration
 app.use(express.json());
@@ -28,13 +28,14 @@ initializePassport();
 app.use(passport.initialize());
 
 //Mongoose configuration
-mongoose.connect(config.MONGO_URI)
-.then(()=>{
+mongoose
+  .connect(config.MONGO_URI)
+  .then(() => {
     console.log("conectado a MongoDB");
-})
-.catch((error)=> {
+  })
+  .catch((error) => {
     console.log(error);
-});
+  });
 
 //Router configuration
 app.use("/api", routes);
@@ -43,5 +44,5 @@ app.use("/api/users", authenticate, userRoutes);
 
 // Start server
 app.listen(PORT, () => {
-    console.log(`Server is running on port ${PORT}`);
+  console.log(`Server is running on port ${PORT}`);
 });
