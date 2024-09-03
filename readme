@@ -1,6 +1,8 @@
 ---------------------------------- Proyecto Back End 2 - Coderhouse ----------------------------------
 
+<h1>
 Este proyecto fue desarrollado como parte del curso de Back End 2 en Coderhouse. El objetivo principal fue crear una API RESTful utilizando Node.js, Express, y MongoDB con Mongoose para manejar la base de datos. La base de datos está alojada en MongoDB Atlas, proporcionando una solución escalable y en la nube.
+</h1>
 
 Tecnologías utilizadas
 Node.js: Plataforma de JavaScript para construir aplicaciones del lado del servidor.
@@ -19,4 +21,4 @@ Instalación
 Clona este repositorio.
 Instala las dependencias con npm install.
 Configura las variables de entorno en un archivo .env para incluir la URL de conexión a MongoDB Atlas.
-Inicia el servidor con npm start.
+Inicia el servidor con npm run dev.
