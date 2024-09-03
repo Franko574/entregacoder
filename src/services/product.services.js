@@ -6,7 +6,7 @@ class ProductService {
   }
   getAll = async (page, limit, name, sort) => {
     try {
-      return await prodDao.getAll(page, limit, name, sort);
+      return await this.prodDao.getAll(page, limit, name, sort);
     } catch (error) {
       console.log(error);
     }
@@ -14,7 +14,7 @@ class ProductService {
 
   getById = async (id) => {
     try {
-      const prod = await prodDao.getById(id);
+      const prod = await this.prodDao.getById(id);
       if (!prod) return false;
       else return prod;
     } catch (error) {
@@ -24,7 +24,7 @@ class ProductService {
 
   create = async (obj) => {
     try {
-      const newProd = await prodDao.create(obj);
+      const newProd = await this.prodDao.create(obj);
       if (!newProd) return false;
       else return newProd;
     } catch (error) {
@@ -34,7 +34,7 @@ class ProductService {
 
   update = async (id, obj) => {
     try {
-      const prodUpd = await prodDao.update(id, obj);
+      const prodUpd = await this.prodDao.update(id, obj);
       if (!prodUpd) return false;
       else return prodUpd;
     } catch (error) {
@@ -44,7 +44,7 @@ class ProductService {
 
   remove = async (id) => {
     try {
-      const prodDel = await prodDao.delete(id);
+      const prodDel = await this.prodDao.delete(id);
       if (!prodDel) return false;
       else return prodDel;
     } catch (error) {
