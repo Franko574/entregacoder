@@ -34,7 +34,7 @@ router.post(
 router.delete(
   "/:idCart/products/:idProd",
   passport.authenticate("jwt", { session: false }),
-  authorizations(["user"]),
+  authorizations(["admin"]),
   cartcontroller.removeProdToCart
 );
 
@@ -48,7 +48,7 @@ router.put(
 router.delete(
   "/clear/:idCart",
   passport.authenticate("jwt", { session: false }),
-  authorizations(["user"]),
+  authorizations(["admin"]),
   cartcontroller.clearCart
 );
 

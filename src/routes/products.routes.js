@@ -6,7 +6,7 @@ import { authorizations } from "../middlewares/authorization.middleware.js";
 
 const router = Router();
 
-router.get("/", authorizations(["user"]), async (req, res) => {
+router.get("/", authorizations(["admin"]), async (req, res) => {
   try {
     const products = await productModel.find();
     res.json(products);

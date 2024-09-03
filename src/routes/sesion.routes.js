@@ -4,6 +4,7 @@ import { sessioncontroller } from "../controllers/sesion.controller.js";
 import { authDto } from "../dtos/auth.dto.js";
 import { userDto } from "../dtos/user.dto.js";
 import { validate } from "../middlewares/validation.middleware.js";
+import { authorizations } from "../middlewares/authorization.middleware.js";
 
 const router = Router();
 
