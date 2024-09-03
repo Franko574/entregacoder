@@ -22,3 +22,7 @@ Clona este repositorio.
 Instala las dependencias con npm install.
 Configura las variables de entorno en un archivo .env para incluir la URL de conexión a MongoDB Atlas.
 Inicia el servidor con npm run dev.
+
+Carpetas que no entran en esta entrega
+-Views
+-Managers
