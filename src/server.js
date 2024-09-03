@@ -10,6 +10,9 @@ import { config } from "./config/config.js";
 import { initializePassport } from "./config/passport.config.js";
 import passport from "passport";
 import { errorHandler } from "./middlewares/errorHandler.js";
+import cartRouter from "./routes/cart.routes.js";
+import productRouter from "./routes/products.routes.js";
+import { initMongoDB } from "./db/database.js";
 
 const app = express();
 
@@ -40,10 +43,13 @@ mongoose
 
 //Router configuration
 app.use("/api", routes);
+app.use("/products", productRouter);
+app.use("/carts", cartRouter);
 app.use("/api/sesion", sessionRoutes);
 app.use("/api/users", authenticate, userRoutes);
 app.use(errorHandler);
 
+initMongoDB();
 // Start server
 app.listen(PORT, () => {
   console.log(`Server is running on port ${PORT}`);

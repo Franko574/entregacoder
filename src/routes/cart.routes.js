@@ -20,8 +20,6 @@ router.post(
 
 router.put("/:id", cartcontroller.update);
 
-router.post("/:id/products");
-
 router.delete("/:id", cartcontroller.remove);
 
 router.post(
