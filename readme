@@ -1,4 +1,4 @@
-Proyecto Back End 2 - Coderhouse
+---------------------------------- Proyecto Back End 2 - Coderhouse ----------------------------------
 
 Este proyecto fue desarrollado como parte del curso de Back End 2 en Coderhouse. El objetivo principal fue crear una API RESTful utilizando Node.js, Express, y MongoDB con Mongoose para manejar la base de datos. La base de datos está alojada en MongoDB Atlas, proporcionando una solución escalable y en la nube.
 
